@@ -135,13 +135,30 @@ function searchJobs(titleQuery, locationQuery) {
       result.push(jobs[i]);
     }
   }
-   let count = result.length;
+  let count = result.length;
   // result.push(count);
-  const data ={
+  const data = {
     result,
     count
-  }
+  };
   return data;
 }
-const data = searchJobs("dev", "us");
-console.log(data);
+// const data = searchJobs("dev", "us");
+// console.log(data);
+
+function searchOnClick() {
+  const titleQuery = document.getElementById("titoloQuery");
+  const locationQuery = document.getElementById("locationQuery");
+  console.log(titleQuery);
+  const data = searchJobs(titleQuery.value, locationQuery.value);
+  let newUl;
+  let body = document.querySelector("body");
+  let newP = document.createElement("p");
+  for (let i = 0; i < data.result.length; i++) {
+    newUl = document.createElement("ul");
+    newUl.innerText = data.result[i].title,data.result[i].location
+    body.appendChild(newUl);
+  }
+  newP.innerText = "Count : " + data.count;
+  body.appendChild(newP);
+}
